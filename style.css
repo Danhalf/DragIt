@@ -1,0 +1,53 @@
+button {
+  cursor: pointer;
+}
+
+.parrent {
+  width: 80vw;
+  height: 90vh;
+  margin: 0 auto;
+  background: tomato;
+  position: relative;
+  border: 4px solid #000;
+}
+
+.drag {
+  width: 40%;
+  height: 20%;
+  border: 3px solid #000;
+  background: lightgray;
+  position: relative;
+  user-select: none;
+  text-align: center;
+  border-radius: 6px;
+}
+.close-drag {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  overflow: hidden;
+}
+.inner-text {
+}
+
+.show-window {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+.hide-content {
+  display: none;
+}
+
+.drag-now {
+  cursor: move;
+  opacity: 0.6;
+  z-index: 9999;
+  position: absolute;
+}
