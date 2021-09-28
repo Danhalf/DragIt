@@ -48,38 +48,45 @@ class DragIt {
             });
          }
 
-         const handleMouseDown = () => {
-
-            pressed = true;
-            draggable.classList.add("drag-now");
-            elementOffsetX = x - draggable.offsetLeft;
-            elementOffsetY = y - draggable.offsetTop;
-            draggable.style.left = `${x - elementOffsetX}px`;
-            draggable.style.top = `${y - elementOffsetY}px`;
+         const handleMouseDown = (event) => {
+            const target = event.target;
+            if (target === draggable) {
+               pressed = true;
+               target.classList.add("drag-now");
+               console.log(target)
+               elementOffsetX = x - target.offsetLeft;
+               elementOffsetY = y - target.offsetTop;
+               target.style.left = `${x - elementOffsetX}px`;
+               target.style.top = `${y - elementOffsetY}px`;
+            }
          }
 
-         const handleMouseUp = () => {
-            pressed = false;
-            draggable.classList.remove("drag-now");
+         const handleMouseUp = (event) => {
+            const target = event.target;
+            if (target === draggable) {
+               pressed = false;
+               target.classList.remove("drag-now");
+            }
          }
 
          const handleMouseMove = (event) => {
+            const target = event.target;
             [x, y] = [event.clientX, event.clientY]
 
-            if (pressed) {
-               draggable.style.left = `${x - elementOffsetX}px`;
-               draggable.style.top = `${y - elementOffsetY}px`;
-               if (parseInt(draggable.style.left) < 0) {
-                  draggable.style.left = `0px`;
+            if (pressed && target === draggable) {
+               target.style.left = `${x - elementOffsetX}px`;
+               target.style.top = `${y - elementOffsetY}px`;
+               if (parseInt(target.style.left) < 0) {
+                  target.style.left = `0px`;
                }
-               if (parseInt(draggable.style.left) > rightBreak) {
-                  draggable.style.left = `${rightBreak}px`;
+               if (parseInt(target.style.left) > rightBreak) {
+                  target.style.left = `${rightBreak}px`;
                }
                if (parseInt(draggable.style.top) < 0) {
-                  draggable.style.top = `0px`;
+                  target.style.top = `0px`;
                }
-               if (parseInt(draggable.style.top) > bottomBreak) {
-                  draggable.style.top = `${bottomBreak}px`;
+               if (parseInt(target.style.top) > bottomBreak) {
+                  target.style.top = `${bottomBreak}px`;
                }
             }
          }
@@ -87,7 +94,7 @@ class DragIt {
             if (event.target === this.closeElementButtonSelector) {
                return
             }
-            handleMouseDown()
+            handleMouseDown(event)
          });
          parent.addEventListener("mouseup", handleMouseUp);
          parent.addEventListener("mousemove", handleMouseMove);
